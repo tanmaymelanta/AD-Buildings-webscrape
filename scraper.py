@@ -25,14 +25,12 @@ with sync_playwright() as p:
             lon = row['centroid_lon']
             name = clean_filename(row['name'])
 
-            url = f'https://maps.urbi.ae/dubai/geo/{lon}%2C{lat}?m=54.571762%2C24.415654%2F18.72'
+            url = f'https://maps.urbi.ae/dubai/geo/{lon}%2C{lat}?m={lon}%2C{lat}%2F18.72'
             print(f"Scraping: {url}")
 
-            page.goto(url, timeout=60000)
-            page.wait_for_load_state("networkidle")
-
+            page.goto(url)
             element = page.locator(f"xpath={xpath}")
-            element.wait_for(timeout=10000)
+            element.wait_for()
 
             text = element.inner_text()
 
