@@ -1,0 +1,35 @@
+name: Run Playwright Scraper
+
+on:
+  workflow_dispatch:   # manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install pandas playwright openpyxl
+
+      - name: Install Playwright browsers
+        run: |
+          playwright install --with-deps
+
+      - name: Run scraper
+        run: |
+          python scraper.py
+
+      - name: Upload scraped data
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraped-data
+          path: data/
