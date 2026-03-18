@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 
 # Load data
 df = pd.read_excel("residential building joined.xlsx")
-df = df.iloc[0:1000]
+df = df.iloc[0:10]
 
 xpath = '//*[@id="root"]/div/div/div[1]/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div[2]/div/div[1]/div/div/div/div'
 
